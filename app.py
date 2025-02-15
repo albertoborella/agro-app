@@ -2,6 +2,7 @@ import pandas as pd
 import streamlit as st  
 import os
 import uuid
+import plotly.express as px
 
 # Nombre del archivo CSV
 csv_file = 'produc_leche.csv'
@@ -53,9 +54,16 @@ def main():
         # Mostrar los datos actuales del archivo CSV
         st.subheader('Datos registrados')
         df_actual = pd.read_csv(csv_file)
+        df_actual['Fecha'] = pd.to_datetime(df_actual['Fecha'])
+        df_actual['Fecha'] = df_actual['Fecha'].dt.strftime('%d/%m/%y')
         df_actual['Total'] = df_actual['Litros Vendidos'] + df_actual['Litros Consumidos']
         df_actual_sin_id = df_actual.drop(columns=['id'])  # Eliminar la columna 'id'
         st.write(df_actual_sin_id)
+
+        # Crear el gráfico interactivo
+        fig = px.line(df_actual, x='Fecha', y='Total', title='Tendencia de Producción Total de Leche', markers=True)
+        fig.update_layout(xaxis_title='Fecha', yaxis_title='Producción Total (Litros)', xaxis_tickformat='%d/%m/%y')
+        st.plotly_chart(fig)
 
 
 
