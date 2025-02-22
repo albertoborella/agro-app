@@ -1,6 +1,6 @@
 import streamlit as st
 from datetime import datetime
-from data import agregar_precio, cargar_precios
+#from data import agregar_precio, cargar_precios
 
 # Formulario para ingresar litros vendidos y consumidos
 def mostrar_formulario(agregar_datos):
@@ -11,7 +11,7 @@ def mostrar_formulario(agregar_datos):
         submit_button = st.form_submit_button('Agregar datos')
         if submit_button:
             agregar_datos(fecha, litros_vend, litros_cons)
-
+            st.success(f"Litros Totales Producidos el {fecha}: {litros_vend + litros_cons} litros")
 
 # Formulario para ingresar datos
 def mostrar_formulario_precios(agregar_precio):
@@ -27,8 +27,5 @@ def mostrar_formulario_precios(agregar_precio):
             agregar_precio(mes, año, precio)
             st.success(f"Precio de leche agregado: {mes} {año} - ${precio:.2f}")
 
-        # Opción para mostrar los precios cargados
-        if st.checkbox("Mostrar precios registrados"):
-            df_precios = cargar_precios()
-            st.write(df_precios)
+        
 

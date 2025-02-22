@@ -1,33 +1,20 @@
 import streamlit as st
-from forms import mostrar_formulario, mostrar_formulario_precios
-from data import cargar_datos, agregar_datos, agregar_precio, cargar_precios
-from visualizations import mostrar_graficos
+# import utilidades as util 
 
 def main():
-    #st.title('Producción de Leche')
-
-    # Crear el menú de seleccion
-    menu = st.sidebar.selectbox('Selecciona una opción', ['Ingreso de produccion de leche',
-                                                          'Ingreso el Precio de Leche',
-                                                          'Tabla de Producción de Leche',
-                                                          'Tabla de Precios de Leche'])
-
-    if menu == "Ingreso de produccion de leche":
-        st.subheader("Ingreso de datos de Producción de Leche")
-        mostrar_formulario(agregar_datos)
-    elif menu == "Tabla de Producción de Leche":
-        st.subheader("Tabla de datos de Producción de Leche")
-        df_actual = cargar_datos()
-        st.write(df_actual)
-    elif menu == "Ingreso el Precio de Leche":
-        st.subheader("Precio de Leche vendida a Industria")
-        mostrar_formulario_precios(agregar_precio)
-    elif menu == "Tabla de Precios de Leche":
-        st.subheader("Tabla de datos de Precios de Leche")
-        df_actual = cargar_precios()
-        st.write(df_actual)
-        # Mostrar gráficos
-        #mostrar_graficos(df_actual)
+    
+   with st.sidebar:
+      st.page_link("main.py",label="Inicio")
+      st.page_link("pages/tabla_produccion_leche.py",label="Producción de Leche")
+      st.page_link("pages/tabla_precios_leche.py", label="Precios por litro de leche")
+      st.page_link("pages/analisis_produccion.py", label="Anáĺisis de Producción de Leche")
+      st.page_link('pages/datos_produccion.py', label="Ingreso de producción")
+      st.page_link("pages/datos_precios_leche.py", label="Ingreso del precio de leche")
 
 if __name__ == '__main__':
     main()
+    st.title("Bienvenido a la aplicación de análisis de producción de leche")
+    st.write("Esta aplicación permite analizar la producción de leche de una granja y los precios de la leche en el mercado.")
+    st.write("Para comenzar, seleccione una opción del menú lateral.")
+    st.write("Si desea ingresar datos, seleccione la opción correspondiente en el menú lateral.")
+    st.write("Si desea analizar los datos, seleccione la opción correspondiente en el menú lateral.")

@@ -1,6 +1,7 @@
 import pandas as pd
 import os
 import uuid
+from datetime import datetime
 
 csv_file = 'produc_leche.csv'
 precio_csv_file = 'precio_leche.csv'
@@ -26,12 +27,11 @@ def cargar_datos():
     crear_csv()
     df = pd.read_csv(csv_file)
     df['Fecha'] = pd.to_datetime(df['Fecha'])
-    df['Fecha'] = df['Fecha'].dt.strftime('%d/%m/%y')
+    #df['Fecha'] = df['Fecha'].dt.strftime('%d/%m/%y')
     df['Total Producido'] = df['Litros Vendidos'] + df['Litros Consumidos']
     df = df.drop(columns=['id'])
     return df
 
-# Nuevas funciones para manejar precio_leche.csv
 def agregar_precio(mes, año, precio):
     nuevo_id = str(uuid.uuid4())
     nuevo_dato = pd.DataFrame([[nuevo_id,mes,año,precio]], columns=['id','Mes','Año','Precio'])
