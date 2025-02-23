@@ -27,5 +27,7 @@ def mostrar_formulario_precios(agregar_precio):
             agregar_precio(mes, año, precio)
             st.success(f"Precio de leche agregado: {mes} {año} - ${precio:.2f}")
 
+
+
         
 
