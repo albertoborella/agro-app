@@ -1,5 +1,5 @@
 import streamlit as st  
-from data import cargar_datos, cargar_precios
+from data import *
 
 st.set_page_config(
       layout="wide",
@@ -20,5 +20,5 @@ with c1:
       st.write(df_actual)
 with c2:
       st.markdown("<h5 style='text-align:center;'>Precios de litro de leche</h5>", unsafe_allow_html=True)
-      df_actual = cargar_precios()
+      df_actual = cargar_precio()
       st.write(df_actual)

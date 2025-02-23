@@ -3,14 +3,9 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 from data import *
 
-# def mostrar_graficos(df):
-#     fig = px.line(df, x='Fecha', y='Total Producido', title='Tendencia de Producción Total de Leche', markers=True)
-#     fig.update_layout(xaxis_title='Fecha', yaxis_title='Producción Total (Litros)', xaxis_tickformat='%d/%m/%y')
-#     st.plotly_chart(fig)
-
 # Cargar datos de producción y precios
 df_produccion = cargar_datos()
-df_precios = cargar_precios()
+df_precios = cargar_precio()
 
 # Gráfico de producción total de los últimos 30 registros
 def ultimas_producciones():
@@ -29,22 +24,22 @@ def ultimas_producciones():
     plt.grid()
     st.pyplot(plt)
 
-# Función para mostrar el gráfico de producción mensual
+#Función para mostrar el gráfico de producción mensual
 def mostrar_produccion_mensual():
     # Seleccionar el año
     año_seleccionado = st.selectbox("Selecciona el año:", df_produccion['Fecha'].dt.year.unique())
-    
     # Filtrar por el año seleccionado
-    df_produccion['Fecha'] = pd.to_datetime(df_produccion['Fecha'])  # Asegurarse de que la columna Fecha sea de tipo datetime
+    pd.to_datetime(df_produccion['Fecha'], errors='coerce')
     df_anio = df_produccion[df_produccion['Fecha'].dt.year == año_seleccionado]
-    
     # Agrupar por mes y sumar la producción total
     df_mensual = df_anio.groupby(df_anio['Fecha'].dt.month).agg({'Total Producido': 'sum'}).reset_index()
     df_mensual['Mes'] = df_mensual['Fecha'].apply(lambda x: pd.to_datetime(f"{año_seleccionado}-{x}-01").strftime('%B'))
-    
     # Crear gráfico de barras
     fig = px.bar(df_mensual, x='Mes', y='Total Producido', title=f'Total de Producción Mensual - {año_seleccionado}',
                  labels={'Total Producido': 'Producción Total (Litros)', 'Mes': 'Mes'})
     fig.update_layout(xaxis_title='Mes', yaxis_title='Producción Total (Litros)')
-    
     st.plotly_chart(fig)
+
+
+
+
