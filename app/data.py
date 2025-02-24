@@ -26,19 +26,6 @@ def agregar_datos(fecha, litros_vend, litros_cons):
     df_actualizado = pd.concat([df_existente, nuevo_dato], ignore_index=True)
     df_actualizado.to_csv(csv_file, index=False)
 
-# def cargar_datos():
-#     crear_csv()  # Asegúrate de que esta función esté definida
-#     df = pd.read_csv(csv_file)
-#     # Convertir la columna 'Fecha' a datetime
-#     df['Fecha'] = pd.to_datetime(df['Fecha'])
-#     # Calcular el total producido
-#     df['Total Producido'] = df['Litros Vendidos'] + df['Litros Consumidos']
-#     # Eliminar la columna 'id'
-#     df = df.drop(columns=['id'])
-#     # Ordenar por fecha
-#     #df = df.sort_values(by='Fecha', ascending=False)
-#     return df
-
 def cargar_datos():
     try:
         crear_csv()  # Asegúrate de que esta función esté definida

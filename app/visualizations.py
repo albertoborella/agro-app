@@ -23,6 +23,9 @@ def ultimas_producciones():
     plt.ylabel('Total Producido (Litros)')
     plt.grid()
     st.pyplot(plt)
+    st.markdown("""
+        <hr style="height: 4px; border: none; color: #FF5733; background-color: #FF5733;" />
+    """, unsafe_allow_html=True)  
 
 #Función para mostrar el gráfico de producción mensual
 def mostrar_produccion_mensual():

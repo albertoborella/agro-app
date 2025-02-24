@@ -7,8 +7,12 @@ with st.sidebar:
       st.page_link('pages/datos_produccion.py', label="Produccion diaria de leche y precio mensual")
       st.page_link("pages/tabla_produccion_leche.py",label="Tablas de produccion y precio de ventas")
       st.page_link("pages/analisis_produccion.py", label="Anáĺisis mensual de producción")
+      st.page_link("pages/tablero_produccion.py", label="Tablero mensual de produccion")
 
-st.markdown("<h3 style='text-align:center;'>Ingreso de datos de Producción de Leche</h3>", unsafe_allow_html=True)    
+st.markdown("<h3 style='text-align:center;'>Ingreso de datos de Producción de Leche</h3>", unsafe_allow_html=True) 
+st.markdown("""
+        <hr style="height: 4px; border: none; color: #FF5733; background-color: #FF5733;" />
+    """, unsafe_allow_html=True)   
 c1, c2 = st.columns(2)
 with c1:
       st.markdown("<h5 style='text-align:center;'>Ingreso de datos de Producción</h5>", unsafe_allow_html=True)
