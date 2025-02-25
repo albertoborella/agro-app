@@ -2,6 +2,7 @@ import pandas as pd
 import os
 import uuid
 from datetime import datetime
+import streamlit as st
 
 csv_file = 'produc_leche.csv'
 precio_csv_file = 'precio_leche.csv'
@@ -38,10 +39,36 @@ def cargar_datos():
         df['Total Producido'] = df['Litros Vendidos'] + df['Litros Consumidos']
         # Eliminar la columna 'id'
         df = df.drop(columns=['id'])
+        # Ordenar por fecha en orden descendente
         df = df.sort_values(by='Fecha', ascending=False)
+        # Formatear la columna 'Fecha' para mostrar solo la fecha en formato día/mes/año
+        df['Fecha'] = df['Fecha'].dt.strftime('%d/%m/%Y')  # Cambia el formato según tus necesidades
         return df
     except Exception as e:
         print(f"Error al cargar datos: {e}")
+
+df = cargar_datos()
+
+# # Editar el DataFrame
+# def editar_dataframe(df):
+#     # Mostrar el DataFrame
+#     st.write("Datos actuales:")
+#     st.dataframe(df)
+    # Seleccionar la fila a editar
+#     fila_seleccionada = st.selectbox("Selecciona la fila a editar", range(len(df)))
+#     # Editar valores
+#     for columna in df.columns:
+#         nuevo_valor = st.text_input(f"Nuevo valor para {columna} (actual: {df.iloc[fila_seleccionada][columna]})", 
+#                                      value=df.iloc[fila_seleccionada][columna])
+#         df.at[fila_seleccionada, columna] = nuevo_valor  # Actualiza el DataFrame
+#     if st.button("Guardar cambios"):
+#         st.success("Cambios guardados.")
+#         # Aquí puedes guardar el DataFrame actualizado en un archivo CSV si lo deseas
+#         # df.to_csv(csv_file, index=False)
+# # Cargar datos
+# df = cargar_datos()
+# # Editar el DataFrame
+# editar_dataframe(df)
 
 # Diccionario para convertir nombres de meses a números
 meses = {

@@ -7,11 +7,10 @@ st.set_page_config(
 )
 
 with st.sidebar:
-      st.page_link("main.py",label="Inicio")
-      st.page_link('pages/datos_produccion.py', label="Produccion diaria de leche y precio mensual")
-      st.page_link("pages/tabla_produccion_leche.py",label="Tablas de produccion y precio de ventas")
-      st.page_link("pages/analisis_produccion.py", label="Anáĺisis mensual de producción")
-      st.page_link("pages/tablero_produccion.py", label="Tablero mensual de produccion")
+      st.page_link("main.py",label="🏠 Inicio")
+      st.page_link('pages/datos_produccion.py', label="📈 Produccion diaria de leche")
+      st.page_link("pages/tabla_produccion_leche.py",label="📋 Tablas de produccion")
+      st.page_link("pages/tablero_produccion.py", label="📊 Tablero mensual de producción")
 
 st.markdown("<h3 style='text-align:center;'>Ingreso de datos de Producción de Leche</h3>", unsafe_allow_html=True) 
 st.markdown("""
@@ -21,8 +20,9 @@ c1, c2 = st.columns([65,35])
 with c1:
       st.markdown("<h5 style='text-align:center;'>Datos de Producción de Leche</h5>", unsafe_allow_html=True)
       df_actual = cargar_datos()
-      st.write(df_actual)
+      # Mostrar el DataFrame sin la columna de índice
+      st.dataframe(df_actual, use_container_width=True, hide_index=True)  # O st.table(df, use_container_width=True)
 with c2:
       st.markdown("<h5 style='text-align:center;'>Precios de litro de leche</h5>", unsafe_allow_html=True)
       df_actual = cargar_precio()
-      st.write(df_actual)
+      st.dataframe(df_actual, use_container_width=True, hide_index=True)  # O st.table(df, use_container_width=True)
